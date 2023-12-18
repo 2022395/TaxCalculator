@@ -8,6 +8,7 @@ import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -299,6 +300,18 @@ private static void removeUser(Connection connection, Scanner scanner) throws SQ
     }
     
    
+}
+
+//checks if the user name exists in database
+private static boolean userExists(String name, Connection connection) throws SQLException {
+    try (PreparedStatement statement = connection.prepareStatement(
+            "SELECT COUNT(*) FROM taxPayerdata WHERE name = ?")) {
+        statement.setString(1, name);
+        try (ResultSet resultSet = statement.executeQuery()) {
+            resultSet.next();
+            return resultSet.getInt(1) > 0;
+        }
+    }
 }
     
 }
