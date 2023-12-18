@@ -8,6 +8,7 @@ import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -82,4 +83,41 @@ public class DatabaseMenu {
          
  
      }
+    
+      // this method gets the user input,
+     //checks the database whether successfully created or not
+     //After the database creation, adds the new instance of TaxPayer to the database.
+     public static void userInput() throws SQLException, ClassNotFoundException, InstantiationException, IllegalAccessException{
+         try{
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("What is your name");
+        String name=scanner.nextLine();
+        System.out.println("What is your annual income?");
+        double income= scanner.nextDouble();
+        
+
+        //succesfully database and table created
+        if (DatabaseSetup.setupDB()){
+            System.out.println("Database and table created");
+        
+        }else {
+            System.out.println("Oh no! There was a database creation problem...");
+        }
+        //Adding t1 to the database
+        //creates new instance of TaxPayer
+        TaxPayer t1=new TaxPayer(name,income,uscCalculator(income),68.26,calculateTax(income,name),prsiCalculator(income));
+        
+        //adds the new instance to the database
+        DatabaseWriter dbw= new DatabaseWriter();
+        if (dbw.addTaxPayer(t1)){
+            System.out.println("New record added");
+        }
+         }
+         catch(InputMismatchException e){
+             System.out.println("Unexpected income type! try again");
+             
+         
+         }
+    
+    }
 }
