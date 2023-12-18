@@ -44,5 +44,38 @@ public class TaxCalculator {
         
 
 }
+         //income tax calculator
+        public static double calculateTax(double income, String name) {
+            
+            
+             
+        double weeklyIncome = income/52;
+        double standardRate = 0.2;
+        double higherRate = 0.4;
+
+        //tax credits and rate bands for 2023
+        double singlePersonTaxCredit = 1775/52;
+        double employeeTaxCredit = 1775/52;
+        double totalTaxCredits = singlePersonTaxCredit + employeeTaxCredit;
+        double rateBand = 40000 / 52; // Weekly rate band
+        
+        // Calculate taxed at standard rate
+        double taxedAtStandardRate = Math.min(weeklyIncome, rateBand) * standardRate;
+
+        // Calculate taxed at higher rate
+        double taxedAtHigherRate = Math.max(0, weeklyIncome - rateBand) * higherRate;
+
+        // Calculate gross tax
+        double grossTax = taxedAtStandardRate + taxedAtHigherRate;
+
+        // Deduct tax credits
+        double netTax = Math.max(0, grossTax - totalTaxCredits);
+        System.out.println(name+"'s weekly tax is: €" + netTax);
+            System.out.println(name+"'s weekly tax Credit is" + totalTaxCredits);
+
+        return netTax;
+       
+    }
+        
     
 }
