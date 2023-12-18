@@ -20,7 +20,7 @@ import java.util.logging.Logger;
  *
  * @author Volkan Tibet Tuylu-2022395-
  */
-public class DatabaseMenu {
+public class DatabaseMenu extends Database {
     //main menu creation
     public static boolean menuDB() throws ClassNotFoundException, InstantiationException, IllegalAccessException {
        
