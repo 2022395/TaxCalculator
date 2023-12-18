@@ -11,6 +11,8 @@ import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -118,6 +120,45 @@ public class DatabaseMenu {
              
          
          }
+    
+    }
+     // Implement user menu options
+      // Example: Fetch user data from the database
+    private static void userMenu (Connection connection) {
+        
+        System.out.println("User Menu:");
+        System.out.println("1:Existing User");
+        System.out.println("2:Create an account");
+        Scanner scanner=new Scanner(System.in);
+        String selection =scanner.nextLine();
+        
+        System.out.println("What is your login name?");
+        String name=scanner.nextLine();
+         try {
+             if(parseInt(selection)==1&&userExists(name, connection))
+                 
+                fetchUserloginData(connection,name);
+             else if(parseInt(selection)==2){
+               
+                 userInput();
+                 
+             
+             }
+             else{
+                 System.out.println("Name: "+name +" does not exist in database, try again!");
+                 
+                 }
+                //handles exceptions
+         } catch (SQLException ex) {
+             Logger.getLogger(DatabaseMenu.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (ClassNotFoundException ex) {
+             Logger.getLogger(DatabaseMenu.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (InstantiationException ex) {
+             Logger.getLogger(DatabaseMenu.class.getName()).log(Level.SEVERE, null, ex);
+         } catch (IllegalAccessException ex) {
+             Logger.getLogger(DatabaseMenu.class.getName()).log(Level.SEVERE, null, ex);
+         }
+        
     
     }
 }
