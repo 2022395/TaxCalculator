@@ -15,6 +15,9 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static taxcalculator.TaxCalculator.calculateTax;
+import static taxcalculator.TaxCalculator.prsiCalculator;
+import static taxcalculator.TaxCalculator.uscCalculator;
 
 /**
  *
