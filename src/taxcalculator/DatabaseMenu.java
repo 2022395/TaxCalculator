@@ -313,5 +313,26 @@ private static boolean userExists(String name, Connection connection) throws SQL
         }
     }
 }
+
+   //Fetches the user data from the database
+    private static void fetchUserData(Connection connection) throws SQLException {
+        
+        //selects from the table
+        String query = "SELECT * FROM taxPayerdata";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+            while (resultSet.next()) {
+               // System.out.println("User ID: " + resultSet.getInt("id"));
+               //I can retrieve any data from the database as I did below
+                System.out.println("Username: " + resultSet.getString("name"));
+                System.out.println("Gross Income: "   +   resultSet.getDouble("income"));
+                System.out.println("TaxCredit"+resultSet.getDouble("taxCredit"));
+                System.out.println("");
+               
+            }
+        }
+    }
+    
     
 }
