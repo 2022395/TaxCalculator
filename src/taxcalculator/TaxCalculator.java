@@ -14,8 +14,8 @@ public class TaxCalculator {
     /**
      * @param args the command line arguments
      */
-    public static void main(String[] args) {
-        
+    public static void main(String[] args) throws ClassNotFoundException, InstantiationException, IllegalAccessException {
+        DatabaseMenu.menuDB();
     }
     //Calculates the usc
         public static Double uscCalculator(double income) {
