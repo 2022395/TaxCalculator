@@ -246,5 +246,10 @@ switch (adminChoice) {
 
         
     } 
+    private static void modifyOwnProfile(String username, Connection connection) {
+
+    System.out.println("Modifying own profile for " + username);
+ 
+}
     
 }
