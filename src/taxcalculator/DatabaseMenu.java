@@ -161,4 +161,90 @@ public class DatabaseMenu {
         
     
     }
+              // Implement & display admin menu options
+         // Example: Update database or perform administrative tasks
+    private static void adminMenu (Connection connection, Scanner scanner) {
+     
+ boolean loggedIn = false;
+    
+    //When the user login granted displays the Admin Menu
+    while (!loggedIn) {
+        System.out.println("Admin Menu:");
+
+      
+        // gets the username and password
+        System.out.print("Enter username: ");
+        String username = scanner.nextLine();
+        System.out.print("Enter password: ");
+        String password = scanner.nextLine();
+
+        //If the userinput matches with the correct username and password
+        if (loginAuthenticator.authenticate(username, password)) {
+            System.out.println("Login successful. Welcome, " + username + "!");
+            loggedIn = true; // Set to true to break out of the login loop
+
+            boolean validChoice = false;
+
+          
+            // displays the available options in the Admin Menu
+            while (!validChoice) {
+                try {
+                    System.out.println("1. Modify Own Profile");
+                    System.out.println("2. List All Users");
+                    System.out.println("3. Remove User");
+                    System.out.println("4. Update User");
+                    System.out.println("5. Exit Admin Menu");
+                    System.out.print("Enter your choice: ");
+
+                   
+                    //admin's selection
+                    //int adminChoice;
+                    
+ //reads the admin's input as a String then parses as an integer into the switch                    
+
+    
+    String input = scanner.nextLine();
+   
+    int adminChoice = Integer.parseInt(input.trim());
+   
+ 
+  
+//this switch calls the methods depending the admin's input
+switch (adminChoice) {
+    case 1:
+        modifyOwnProfile(username, connection);
+        break;
+    case 2:
+        fetchUserData(connection);
+        break;
+    case 3:
+        removeUser(connection, scanner);
+        break;
+    case 4:
+        updateDatabase(connection, scanner);
+        break;
+    case 5:
+        System.out.println("Exiting Admin Menu.");
+        return;
+    default:
+        System.out.println("Invalid choice. Please try again.");
+        
+}
+
+                } catch (SQLException ex) {
+                    Logger.getLogger(DatabaseMenu.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                catch (NumberFormatException e) {
+        }
+            }
+        // if the username or password incorrect
+        } else {
+            System.out.println("Login failed. Invalid username or password.");
+            System.out.println("Please try again.");
+        }
+    }
+
+        
+    } 
+    
 }
