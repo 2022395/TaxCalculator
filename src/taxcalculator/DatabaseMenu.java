@@ -7,6 +7,7 @@ package taxcalculator;
 import static java.lang.Integer.parseInt;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -250,6 +251,54 @@ switch (adminChoice) {
 
     System.out.println("Modifying own profile for " + username);
  
+}
+    
+        //removes the user from the database
+private static void removeUser(Connection connection, Scanner scanner) throws SQLException {
+
+   
+    try  {
+      System.out.print("Enter the username to remove: ");
+       
+       String usernameToRemove = scanner.nextLine();
+       
+        // Check if the user exists before attempting to remove
+        if (userExists(usernameToRemove, connection)) {
+            // Execute SQL DELETE operation to remove the user by calling name
+            try (PreparedStatement statement = connection.prepareStatement(
+                    "DELETE FROM taxPayerdata WHERE name = ?")) {
+                statement.setString(1, usernameToRemove);
+                int rowsAffected = statement.executeUpdate();
+              //when the name removed from the database this line will be printed
+                if (rowsAffected > 0) {
+                    System.out.println("User " + usernameToRemove + " removed from the database.");
+                    
+                    
+                    
+                 // if the name does not exist in the database this line works 
+                } else {
+                    System.out.println("User " + usernameToRemove + " not found in the database.");
+                
+                    
+                 
+                }
+                // handle the exception appropriately for this operation
+            } catch (SQLException e) {
+               
+                System.out.println("Error removing user: " + e.getMessage());
+                
+            }
+        } else {
+            System.out.println("User " + usernameToRemove + " not found in the database.");
+           
+        }
+        // Handles any other exceptions that might occur during user input
+    } catch (Exception e) {
+        
+        System.out.println("Error: " + e.getMessage());
+    }
+    
+   
 }
     
 }
