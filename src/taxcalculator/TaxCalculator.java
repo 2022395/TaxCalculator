@@ -5,7 +5,9 @@
 package taxcalculator;
 
 /**
- *https://github.com/2022395/TaxCalculator
+ *  Object Oriented Constructs (OOC) 
+    And Databases (DB) Integrated CA
+ *Github link : https://github.com/2022395/TaxCalculator
  * @author Volkan Tibet Tuylu-2022395-
  * @author Ana Clara Quilapan-2022475-
  */
