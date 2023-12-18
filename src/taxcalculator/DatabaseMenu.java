@@ -181,7 +181,7 @@ public class DatabaseMenu extends Database {
         String password = scanner.nextLine();
 
         //If the userinput matches with the correct username and password
-        if (loginAuthenticator.authenticate(username, password)) {
+        if (LoginAuthenticator.authenticate(username, password)) {
             System.out.println("Login successful. Welcome, " + username + "!");
             loggedIn = true; // Set to true to break out of the login loop
 
