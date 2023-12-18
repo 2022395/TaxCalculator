@@ -77,5 +77,33 @@ public class TaxCalculator {
        
     }
         
+            //calculates prsi
+    public static Double prsiCalculator(double income){
+      
+        double basicPRSICharge=0;
+        // Calculate PRSI credit
+        double maxCredit=12.0 ;
+       
+        // Calculate basic PRSI charge (4% of income)
+        double prsiChargeRate = 0.04;
+        
+        
+        if (income/52>=352.01){
+         basicPRSICharge = income/52 * prsiChargeRate-maxCredit;
+        
+        }
+        //There is no prsi charge if the weekly income is less than 352.01 Euro
+        else{
+            basicPRSICharge=0;
+        
+        }
+        System.out.println("Basic PRSI Charge (4% of Income): Euro" + basicPRSICharge);
+       
+        return basicPRSICharge;
+    
+ 
+            
+        
+    }
     
 }
