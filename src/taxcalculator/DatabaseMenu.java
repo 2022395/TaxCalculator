@@ -334,5 +334,31 @@ private static boolean userExists(String name, Connection connection) throws SQL
         }
     }
     
+     private static void fetchUserloginData(Connection connection, String name) throws SQLException {
+        // Example: Fetch user data from the database
+        String query = "SELECT * FROM taxPayerdata";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query);
+             ResultSet resultSet = preparedStatement.executeQuery()) {
+
+           while (resultSet.next()) {
+               if(name.equals(resultSet.getString("name"))){
+               
+               //I can retrieve any data from the database as I did below
+                System.out.println("Username: " + resultSet.getString("name"));
+                System.out.println("Gross Income: "   +   resultSet.getDouble("income"));
+                System.out.println("TaxCredit"+resultSet.getDouble("taxCredit"));
+                System.out.println("");
+               
+           }
+               
+           }
+           
+        }
+        catch (Exception e) {
+            System.out.println("Error!");
+        }
+    }
+    
+    
     
 }
