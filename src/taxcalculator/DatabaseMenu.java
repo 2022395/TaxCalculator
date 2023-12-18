@@ -358,6 +358,41 @@ private static boolean userExists(String name, Connection connection) throws SQL
             System.out.println("Error!");
         }
     }
+     
+         //Update database, it retrieves info from the database and rewrites it
+private static void updateDatabase(Connection connection, Scanner scanner) throws SQLException {
+
+       
+            System.out.print("Enter the current name: ");
+            String currentName = scanner.nextLine();
+
+            System.out.print("Enter the new name: ");
+            String newName = scanner.nextLine();
+
+            System.out.print("Enter the new income: ");
+            double newIncome = scanner.nextDouble();
+
+            // Example: Update database for name and income columns based on user input
+            String updateQuery = "UPDATE taxpayerdata SET name = ?, income = ? WHERE name = ?";
+            //updates the values of name, Income
+            try {
+                PreparedStatement preparedStatement = connection.prepareStatement(updateQuery); 
+                preparedStatement.setString(1, newName);
+                preparedStatement.setDouble(2, newIncome);
+                preparedStatement.setString(3, currentName);
+
+                int rowsAffected = preparedStatement.executeUpdate();
+
+                System.out.println(rowsAffected + " rows updated.");
+                
+        
+                
+            }
+           
+            catch (NumberFormatException e) {
+            //System.out.println("NumberFormatException: " + e.getMessage());
+        }
+        }
     
     
     
